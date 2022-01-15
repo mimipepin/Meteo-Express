@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div>
+
+        <h1>Météo Express</h1>
+
+        <nav id= "menu">
+            <input type="button" class="button-9" value="Accueil">
+            <input type="button" class="button-9" value="Contact">
+            <input type="button" class="button-9" value="Aide">
+        </nav>
+
+        <form id = "form">
+            <p>Entrez une ville ci-dessous : </p> 
+            <input type="text" id="city" name="city">
+            <input type="submit" class="button-9"  value="Valider" onClick="submitForm()">
+        </form>
+    </div>
+
+    <div>
+        <h2>Informations de la ville de </h2>
+        <h2 id ="villeAcompleter" value=""></h2>
+
+        <p>Le soleil se lèvera à : </p>
+        <t id ="leverSoleil" value=""></t>
+
+        <p>Le soleil se couchera à : </p>
+        <t id="coucherSoleil" value=""></t>
+
+        <p>Température : </p>
+        <t id="temp" value=""></t>
+
+        <p>Maximum : </p>
+        <t id="tempMax" value=""></t>
+
+        <p>Minimum: </p>
+        <t id="tempMin" value=""></t>
+
+        <p>Le temps sera : </p>
+        <t id="temps" value=""></t>
+
+        <p>La vitesse du vent sera : </p>
+        <t id="vitVent" value=""></t>
+
+        <p>Pression atmopshérique : </p>
+        <t id="pression" value=""></t>
+
+
+
+        <p></p>
+    </div>
+
+    <div id="footer">
+
+        Site réalisé par LE GOASTELLER Maïwenn & LALANDE Héloïse
+
+
+    </div>
+
+    <script>
+        let submitForm = function () {
+            let city = document.forms.form.elements.city.value;
+            getMeteo(city);    
+        }
+    </script>
+
+
+</body>
+
+</html>
