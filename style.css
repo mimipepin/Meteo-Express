@@ -4,7 +4,7 @@ body {
     
 }
 
-div {
+div, article {
     text-align: center;
     padding : 1%;
     display : block;

@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
 </head>
 
@@ -11,66 +12,47 @@
 
         <h1>Météo Express</h1>
 
-        <nav id= "menu">
+        <nav id="menu">
             <input type="button" class="button-9" value="Accueil">
             <input type="button" class="button-9" value="Contact">
             <input type="button" class="button-9" value="Aide">
         </nav>
 
-        <form id = "form">
+        <div id="form">
             <p>Entrez une ville ci-dessous : </p> 
             <input type="text" id="city" name="city">
-            <input type="submit" class="button-9"  value="Valider" onClick="submitForm()">
-        </form>
+            <input type="button" class="button-9"  value="Valider" onClick="getMeteo()">
+        </div>
     </div>
 
-    <div>
-        <h2>Informations de la ville de </h2>
-        <h2 id ="villeAcompleter" value=""></h2>
+    <article>
+        <h2 id ="villeAcompleter"></h2>
 
-        <p>Le soleil se lèvera à : </p>
-        <t id ="leverSoleil" value=""></t>
+        <p id="temps"></p>
 
-        <p>Le soleil se couchera à : </p>
-        <t id="coucherSoleil" value=""></t>
+        <input id="infoSupButton" type="button" value="Afficher plus" onclick="changeVisibiliteInfo()">
 
-        <p>Température : </p>
-        <t id="temp" value=""></t>
+        <div id="infoSup" style="display: none;">
+            <p id ="leverSoleil"></p>
+    
+            <p id="coucherSoleil"></p>
+    
+            <p id="temp"> </p>
+    
+            <p id="tempMin"></p>
+    
+            <p id="tempMax"></p>
+    
+            <p id="vitVent"></p>
+    
+            <p id="pression"></p>
+        </div>
 
-        <p>Maximum : </p>
-        <t id="tempMax" value=""></t>
-
-        <p>Minimum: </p>
-        <t id="tempMin" value=""></t>
-
-        <p>Le temps sera : </p>
-        <t id="temps" value=""></t>
-
-        <p>La vitesse du vent sera : </p>
-        <t id="vitVent" value=""></t>
-
-        <p>Pression atmopshérique : </p>
-        <t id="pression" value=""></t>
-
-
-
-        <p></p>
-    </div>
-
-    <div id="footer">
-
-        Site réalisé par LE GOASTELLER Maïwenn & LALANDE Héloïse
-
-
-    </div>
-
-    <script>
-        let submitForm = function () {
-            let city = document.forms.form.elements.city.value;
-            getMeteo(city);    
-        }
-    </script>
-
+        
+        <footer>
+            Site réalisé par LE GOASTELLER Maïwenn & LALANDE Héloïse
+        </footer>
+    </article>
 
 </body>
 
