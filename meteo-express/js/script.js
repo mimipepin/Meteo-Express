@@ -1,30 +1,32 @@
 let getMeteo = function () {
 	const ville = document.getElementById('city').value;
-    document.getElementById('infoSupButton').style.display = "block";
-	
-	const url = `https://api.openweathermap.org/data/2.5/weather?q=${ville}&lang=fr&APPID=ee07e2bf337034f905cde0bdedae3db8&units=metric`
-    
-	fetch(url)
-    .then(resp => {
-        if (!resp.ok) throw new Error(resp.statusText);
-        console.log(url);
-        return resp.json();
-    })
-    .then(data => insertValues(data))
-    .catch(console.error);
+    if (ville) {
+        document.getElementById('infoSupButton').style.display = "block";
+        
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${ville}&lang=fr&APPID=ee07e2bf337034f905cde0bdedae3db8&units=metric`
+        
+        fetch(url)
+        .then(resp => {
+            if (!resp.ok) throw new Error(resp.statusText);
+            console.log(url);
+            return resp.json();
+        })
+        .then(data => insertValues(data))
+        .catch(console.error);
+    }
 }
 
 let insertValues = function (data) {
     document.getElementById('villeAcompleter').innerHTML = "Informations de la ville de " + data.name;
-    document.getElementById('temps').innerHTML = `Le temps est ${data.weather[0].description}`;
-
-    document.getElementById('leverSoleil').innerHTML = "Le soleil se lèvera à : " + convertTemps(data.sys.sunrise);
-    document.getElementById('coucherSoleil').innerHTML = "Le soleil se couchera à : " + convertTemps(data.sys.sunset);
+    document.getElementById('temps').innerHTML = `${data.weather[0].description} <i class="wi wi-owm-${data.weather[0].id}"></i>`;
     document.getElementById('temp').innerHTML = `Température : ${data.main.temp} °C`;
+
+    document.getElementById('leverSoleil').innerHTML = "Heure de levé du soleil : " + convertTemps(data.sys.sunrise);
+    document.getElementById('coucherSoleil').innerHTML = "Heure de coucher du soleil : " + convertTemps(data.sys.sunset);
     document.getElementById('tempMin').innerHTML = `Température minimum : ${data.main.temp_min} °C`;
     document.getElementById('tempMax').innerHTML = `Température maximum : ${data.main.temp_max} °C`;
-    document.getElementById('vitVent').innerHTML = `La vitesse du vent est de : ${data.wind.speed} m/s`;
-    document.getElementById('pression').innerHTML = `La pression atmosphérique est de : ${data.main.pressure} hPa`;
+    document.getElementById('vitVent').innerHTML = `Vitesse du vent : ${data.wind.speed} m/s`;
+    document.getElementById('pression').innerHTML = `Pression atmosphérique : ${data.main.pressure} hPa`;
 }
 
 let convertTemps = function (unixTime) {
@@ -78,13 +80,22 @@ aideButton.addEventListener("click", event => {
 
 accueilButton = document.getElementById("accueilButton");
 accueilButton.addEventListener("click", event => { 
+    retourAccueil();
+});
+
+accueilLogo = document.getElementById("logo-container");
+accueilLogo.addEventListener("click", event => { 
+    retourAccueil();
+});
+
+let retourAccueil = function () {
     // on enlève ce qui était affiché auparavant
     aide = document.getElementById("aide");
     aide.style.display = "none";
     contact = document.getElementById("contact");
     contact.style.display = "none";
 
-    // on affiche la page d'aide
+    // on affiche la page principale
     accueil = document.getElementById("accueil");
     accueil.style.display = "block";
-});
+}
