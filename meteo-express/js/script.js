@@ -50,23 +50,41 @@ let changeVisibiliteInfo = function () {
     }
 }
 
-let aide = function () {
-    article = document.getElementById("accueil");
-    article.style.display = "none";
-    contact = document.getElementById("contact");
-    contact.style.display = "none";
-
-    aide = document.getElementById("aide");
-    aide.style.display = "block";
-}
-
-
-let contact = function () {
+contactButton = document.getElementById("contactButton");
+contactButton.addEventListener("click", event => { 
+    // on enlève ce qui était affiché auparavant
     article = document.getElementById("accueil");
     article.style.display = "none";
     aide = document.getElementById("aide");
     aide.style.display = "none";
 
+    // on affiche la page de contact
     contact = document.getElementById("contact");
     contact.style.display = "block";
-}
+});
+
+aideButton = document.getElementById("aideButton");
+aideButton.addEventListener("click", event => { 
+    // on enlève ce qui était affiché auparavant
+    article = document.getElementById("accueil");
+    article.style.display = "none";
+    contact = document.getElementById("contact");
+    contact.style.display = "none";
+
+    // on affiche la page d'aide
+    aide = document.getElementById("aide");
+    aide.style.display = "block";
+});
+
+accueilButton = document.getElementById("accueilButton");
+accueilButton.addEventListener("click", event => { 
+    // on enlève ce qui était affiché auparavant
+    aide = document.getElementById("aide");
+    aide.style.display = "none";
+    contact = document.getElementById("contact");
+    contact.style.display = "none";
+
+    // on affiche la page d'aide
+    accueil = document.getElementById("accueil");
+    accueil.style.display = "block";
+});
