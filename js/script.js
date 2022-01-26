@@ -1,6 +1,9 @@
+//le afficher plus s'affiche meme si ville pas valide
+
+//changer la visibilité de ifoSup avec Jquery
+
 $(document).ready(function(){
     $("#valid-button").click(function () {
-        console.log("hehe");
         const ville = document.getElementById('city').value;
         if (ville) {
             document.getElementById('infoSupButton').style.display = "block";
@@ -9,8 +12,12 @@ $(document).ready(function(){
             
             fetch(url)
             .then(resp => {
-                if (!resp.ok) throw new Error(resp.statusText);
-                console.log(url);
+                if (!resp.ok) {
+                    $("#error").toggle();
+                    console.log("pas de ville");
+                    throw new Error(resp.statusText);
+                }
+                console.log("url : " + url);
                 return resp.json();
             })
             .then(data => insertValues(data))
@@ -19,16 +26,16 @@ $(document).ready(function(){
     });
     
     let insertValues = function (data) {
-        $("#villeAcompleter").append("Informations de la ville de " + data.name);
-        $("#temps").append(`${data.weather[0].description} <i class="wi wi-owm-${data.weather[0].id}"></i>`);
-        $("#temp").append(`Température : ${data.main.temp} °C`);
+        $("#villeAcompleter").html("Informations de la ville de " + data.name);
+        $("#temps").html(`${data.weather[0].description} <i class="wi wi-owm-${data.weather[0].id}"></i>`);
+        $("#temp").html(`Température : ${data.main.temp} °C`);
         
-        $("#leverSoleil").append("Heure de lever du soleil : " + convertTemps(data.sys.sunrise));
-        $("#coucherSoleil").append("Heure de coucher du soleil : " + convertTemps(data.sys.sunset));
-        $("#tempMin").append(`Température minimum : ${data.main.temp_min} °C`);
-        $("#tempMax").append(`Température maximum : ${data.main.temp_max} °C`);
-        $("#vitVent").append(`Vitesse du vent : ${data.wind.speed} m/s`);
-        $("#pression").append(`Pression atmosphérique : ${data.main.pressure} hPa`);
+        $("#leverSoleil").html("Heure de lever du soleil : " + convertTemps(data.sys.sunrise));
+        $("#coucherSoleil").html("Heure de coucher du soleil : " + convertTemps(data.sys.sunset));
+        $("#tempMin").html(`Température minimum : ${data.main.temp_min} °C`);
+        $("#tempMax").html(`Température maximum : ${data.main.temp_max} °C`);
+        $("#vitVent").html(`Vitesse du vent : ${data.wind.speed} m/s`);
+        $("#pression").html(`Pression atmosphérique : ${data.main.pressure} hPa`);
     }
     
     
