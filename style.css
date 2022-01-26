@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-color: azure;
+    background-color: #fdf5df;
     
 }
 
@@ -11,7 +11,7 @@ div, article {
     margin: auto;
     width:70%;
     height : 100%;
-    background-color: #fdf5df;
+    
 }
 
 #menu{
@@ -79,5 +79,9 @@ input{
 .button-9:hover {
     background: #00bd68;
   }
+
+footer {
+    
+}
 
 
