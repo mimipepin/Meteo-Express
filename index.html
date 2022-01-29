@@ -17,27 +17,25 @@
 <body>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" class="brand-logo">Meteo Express</a>
+      <a id="logo-container" class="brand-logo accueilButton waves-effect waves-light">Meteo Express</a>
       <ul class="right hide-on-med-and-down">
-        <li><a id="accueilButton">Accueil</a></li>
-        <li><a id="contactButton">Contact</a></li>
-        <li><a id="aideButton">Aide</a></li>
+        <li><a class="accueilButton">Accueil</a></li>
+        <li><a class="contactButton">Contact</a></li>
+        <li><a class="aideButton">Aide</a></li>
       </ul>
-      <ul id="nav-mobile" class="sidenav" style="transform: translateX(-105%);">
-        <!--La barre de navigation s'affiche bien lorsque l'on réduit la taille de la fenêtre
-        Néanmoins, nous n'arrivons pas à lancer avec un clic l'apparition du sommaire des fenêtres-->
-        <li><a href="#">Accueil</a></li>
-        <li><a id="contactButton">Contact</a></li>
-        <li><a id="aideButton">Aide</a></li>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a class="accueilButton sidenav-close">Accueil</a></li>
+        <li><a class="contactButton sidenav-close">Contact</a></li>
+        <li><a class="aideButton sidenav-close">Aide</a></li>
       </ul>
-      <a class="sidenav-trigger" href="#" data-target="nav-mobile">
+      <a class="sidenav-trigger waves-effect waves-light" data-target="nav-mobile">
         <i class="material-icons">menu</i>
       </a>
     </div>
   </nav>
   
   <main>
-    
     <div id="accueil">
       <div class="section no-pad-bot" id="index-banner">
         <div class="container">
@@ -49,7 +47,7 @@
           <div class="row center">
             <a id="valid-button" class="btn-large waves-effect waves-light orange" >Valider</a>
           </div>
-          <p id="error" style="display: none;">La ville selectionnée n'existe pas</p>
+          <p id="error" style="display: none;">La ville selectionnée n'existe pas.</p>
           <br><br>
           
         </div>
@@ -63,11 +61,12 @@
             <td>
               <div>
                 <h5 class="center" id="temps" style="text-transform: capitalize;"></h5>
-                
               </div>
             </td>
             <td>
+              <div>
               <h5 class="center" id="temp"></h5>
+            </div>
             </td>
           </tr>
         </table>
@@ -105,7 +104,7 @@
         </div>
         
         <div class="row center">
-          <input type="button" class="infoSupButton" id="infoSupButton" style="display: none;" onclick="changeVisibiliteInfo()" value="Afficher plus">
+          <input type="button" class="infoSupButton" id="infoSupButton" style="display: none;" value="Afficher plus">
         </div>
         <p></p>
         

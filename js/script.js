@@ -3,25 +3,28 @@
 //changer la visibilité de ifoSup avec Jquery
 
 $(document).ready(function(){
+    $("#nav-mobile").sidenav();
     $("#valid-button").click(function () {
-        const ville = document.getElementById('city').value;
+        const ville = $("#city").val();
         if (ville) {
-            document.getElementById('infoSupButton').style.display = "block";
-            
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${ville}&lang=fr&APPID=ee07e2bf337034f905cde0bdedae3db8&units=metric`
-            
-            fetch(url)
-            .then(resp => {
-                if (!resp.ok) {
-                    $("#error").toggle();
-                    console.log("pas de ville");
-                    throw new Error(resp.statusText);
-                }
-                console.log("url : " + url);
-                return resp.json();
+            // $("#infoSupButton").toggle(true);
+
+            $.ajax({
+                url: `https://api.openweathermap.org/data/2.5/weather?q=${ville}&lang=fr&APPID=ee07e2bf337034f905cde0bdedae3db8&units=metric`,
+                type: "GET",
+                dataType: 'json'
             })
-            .then(data => insertValues(data))
-            .catch(console.error);
+            .done(function (response) {
+                $("#error").toggle(false);
+                $("#infoSupButton").toggle(true);
+                insertValues(response)
+            })
+            .fail(function (error) {
+                $("#error").toggle(true);
+                $("#infoSupButton").toggle(false);
+                console.log("pas de ville");
+                throw new Error(error.statusText);
+            });
         }
     });
     
@@ -38,69 +41,47 @@ $(document).ready(function(){
         $("#pression").html(`Pression atmosphérique : ${data.main.pressure} hPa`);
     }
     
-    
-    
     $("#infoSupButton").click(function () {
-        console.log("1");
-        let bouton = document.getElementById("infoSupButton");
-        if (bouton.value == "Afficher plus") {
-            console.log("2");
-            document.getElementById("infoSup").style.display = "block"; 
-            bouton.value = "Afficher moins";
+        $("#infoSup").slideToggle();
+        if ($("#infoSupButton").val() == "Afficher plus") {
+            $("#infoSupButton").val("Afficher moins");
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#infoSup").offset().top
+            }, 1000);
+
         }
         else {
-            console.log("3");
-            document.getElementById("infoSup").style.display = "none"; 
-            bouton.value = "Afficher plus";
+            $("#infoSupButton").val("Afficher plus");
         }
     });
-    
-    contactButton = document.getElementById("contactButton");
-    contactButton.addEventListener("click", event => { 
-        // on enlève ce qui était affiché auparavant
-        article = document.getElementById("accueil");
-        article.style.display = "none";
-        aide = document.getElementById("aide");
-        aide.style.display = "none";
-        
-        // on affiche la page de contact
-        contact = document.getElementById("contact");
-        contact.style.display = "block";
+
+    // Boutons de menu     
+    $(".contactButton").click(function () {
+        $("#accueil").toggle(false);
+        $("#aide").toggle(false);
+        $("#contact").toggle(true);
     });
     
-    aideButton = document.getElementById("aideButton");
-    aideButton.addEventListener("click", event => { 
-        // on enlève ce qui était affiché auparavant
-        article = document.getElementById("accueil");
-        article.style.display = "none";
-        contact = document.getElementById("contact");
-        contact.style.display = "none";
-        
-        // on affiche la page d'aide
-        aide = document.getElementById("aide");
-        aide.style.display = "block";
+    $(".aideButton").click(function () {
+        $("#accueil").toggle(false);
+        $("#contact").toggle(false);
+        $("#aide").toggle(true);
     });
-    
-    accueilButton = document.getElementById("accueilButton");
-    accueilButton.addEventListener("click", event => { 
+
+    $(".accueilButton").click(function () {   
         retourAccueil();
     });
+
+
     
-    accueilLogo = document.getElementById("logo-container");
-    accueilLogo.addEventListener("click", event => { 
+    $("#container").click(function () {
         retourAccueil();
     });
     
     let retourAccueil = function () {
-        // on enlève ce qui était affiché auparavant
-        aide = document.getElementById("aide");
-        aide.style.display = "none";
-        contact = document.getElementById("contact");
-        contact.style.display = "none";
-        
-        // on affiche la page principale
-        accueil = document.getElementById("accueil");
-        accueil.style.display = "block";
+        $("#aide").toggle(false);
+        $("#contact").toggle(false);
+        $("#accueil").toggle(true);
     }
 });
 
