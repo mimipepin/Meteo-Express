@@ -13,14 +13,41 @@
 
 <body>
 
-    <a href="#!">Main</a> |
-
-    <a href="#!villes">Villes</a> |
-    <a href="#!previsions">Previsions</a> |
-    <a href="#!meteovilles">Meteovilles</a> |
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+          <a id="logo-container" class="brand-logo accueilButton waves-effect waves-light">Meteo Express</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#!previsions">Previsions</a></li>
+            <li><a href="#!meteovilles">Meteovilles</a> </li>
+          </ul>
+    
+          <ul id="nav-mobile" class="sidenav">
+            <a href="#!previsions">Previsions</a> 
+            <a href="#!meteovilles">Meteovilles</a> 
+          </ul>
+          <a class="sidenav-trigger waves-effect waves-light" data-target="nav-mobile">
+            <i class="material-icons">menu</i>
+          </a>
+        </div>
+      </nav>
 
 
     <div ng-view></div>
+
+
+    <footer class="page-footer orange">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h6 class="white-text">Site réalisé par LE GOASTELLER Maïwenn & LALANDE Héloïse</h6>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+              Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+          </div>
+        </footer>
 </body>
 
 </html>
