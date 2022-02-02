@@ -7,6 +7,8 @@ angular.module('meteo').config(['$routeProvider',
             templateUrl: "partials/villes.html"
         }).when('/previsions', {
             templateUrl: "partials/previsions.html"
+        }).when('/meteovilles', {
+            templateUrl: "partials/meteovilles.html"
         });
     }
 ]);
