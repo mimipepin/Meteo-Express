@@ -1,0 +1,13 @@
+{
+  "name": "meteo-angular",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "angular-http-server -p 3000 --rootFile index.html"
+  },
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-http-server": "^1.10.0",
+    "angular-route": "^1.8.2",
+    "materialize-css": "^1.0.0"
+  }
+}
