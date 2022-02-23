@@ -11,6 +11,18 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="css/weather-icons.min.css" type="text/css" rel="stylesheet" />
   <title>Ma Météo</title>
+
+
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("controllerName", ['$scope',function($scope) {
+        $scope.stored = [
+            {title: 'Vannes', text: "Une petite ville de Bretagne"},
+            {title: 'Shangaï', text: "Une métropole chinoise"},
+            {title: 'Jérusalem', text:"WE WILL TAKE IT"}
+        ];
+    }]);
+</script>
 </head>
 
 <body ng-app="meteo">
