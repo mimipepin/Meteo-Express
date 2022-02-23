@@ -1,15 +1,20 @@
-function store(str){
+//TODO
+//PASSER TOUT CA EN ANGULAR
+function store(){
 
     if (storageAvailable('localStorage')){
-        localStorage.setItem(str, str);
+        var inputCity = document.getElementById("city");
+        var description = document.getElementById("description");
+        localStorage.setItem(inputCity, description);
     } else {
         console.log("Stockage non disponible");
     }
 }
 
-function remove(str){
+function remove(){
     if (storageAvailable('localStorage')){
-        localStorage.removeItem(str);
+        var id = document.getElementById("title");
+        localStorage.removeItem(id);
     } else {
         console.log("Stockage non disponible");
     }
