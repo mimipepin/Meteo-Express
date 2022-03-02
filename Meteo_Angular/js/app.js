@@ -7,9 +7,11 @@ app.config(['$routeProvider',
             templateUrl: "partials/villes.html",
             controller: "testController"
         }).when('/previsions', {
-            templateUrl: "partials/previsions.html"
+            templateUrl: "partials/previsions.html/:ville",
+            controller: "previsionsController"
         }).when('/meteovilles', {
-            templateUrl: "partials/meteovilles.html"
+            templateUrl: "partials/meteovilles.html",
+            controller: "meteovillesController"
         });
     }
 ]);
@@ -22,6 +24,45 @@ app.config(['$routeProvider',
 //     // $scope.test = "hey";
 //     // console.log("heeey");
 // }]);
+
+getInfo = function ($http, city) {
+    $http({
+        method: 'GET',
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=fr&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric`
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        return response;
+
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log("pas de ville");
+        throw new Error(error.statusText);
+    });
+}
+
+// permet de passer un argument en paramètre
+// doc : https://docs.angularjs.org/api/ngRoute/service/$route 
+// et https://github.com/angular/angular.js/issues/11063 mais lui il met son controller direct dans le app.config
+app.controller("meteovillesController", ["$scope", "$http", "$route", function ($scope, $http, $routeParams) {
+    $scope.stored = [
+        { title: 'Vannes', text: "Une petite ville de Bretagne" },
+        { title: 'Shangaï', text: "Une métropole chinoise" },
+        { title: 'Jérusalem', text: "WE WILL TAKE IT" }
+      ];
+      
+    // quand on clique sur un lien
+    $routeParams.updateParams({ville: "Vannes"});
+    
+}])
+
+app.controller("previsionsController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
+    console.log($routeParams.ville);
+    info = getInfo($http, $routeParams.ville);
+    console.log(info.weather[0].description);
+}])
+
 
 // Récup la valeur de l'input et les infos correspondantes quand on appuie sur valider
 app.controller("testController", ["$scope", "$http", function($scope, $http) {
@@ -45,3 +86,4 @@ app.controller("testController", ["$scope", "$http", function($scope, $http) {
         });
     }
 }]);
+

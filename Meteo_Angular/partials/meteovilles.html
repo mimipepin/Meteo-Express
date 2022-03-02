@@ -4,19 +4,7 @@
     <a id="nouvelleVille" href="#!villes" class="btn-large waves-effect waves-light blue-grey">Ajouter une ville</a>
 </div>
 
-
-<script>
-    var app = angular.module("myApp", []);
-    app.controller("controllerName", ['$scope', function ($scope) {
-      $scope.stored = [
-        { title: 'Vannes', text: "Une petite ville de Bretagne" },
-        { title: 'Shangaï', text: "Une métropole chinoise" },
-        { title: 'Jérusalem', text: "WE WILL TAKE IT" }
-      ];
-    }]);
-  </script>
-
-<div ng-controller="controllerName">
+<div ng-controller="meteovillesController">
 
     <div class="align-center container" ng-repeat="x in stored">
         <div class="row">
