@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="meteo">
+<html lang="fr" ng-app="meteo">
 
 <head>
   <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
   <script src="node_modules/angular/angular.js"></script>
   <script src="node_modules/angular-route/angular-route.js"></script>
   <script src="node_modules/materialize-css/dist/js/materialize.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/controllers/controller.js"></script>
   <script src="js/storage.js"></script>
   <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css">
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/weather-icons.min.css" type="text/css" rel="stylesheet" />
-  <title>Ma Météo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons-wind.css" rel="stylesheet">
 
+  <title>Ma Météo</title>
 
   
 </head>
@@ -24,7 +28,7 @@
         <a id="logo-container" class="brand-logo accueilButton waves-effect waves-light">Ma météo</a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#!previsions">Previsions</a></li>
-          <li><a href="#!meteovilles">Meteovilles</a> </li>
+          <li><a href="/">Meteovilles</a> </li>
         </ul>
         <a class="sidenav-trigger waves-effect waves-light" data-target="nav-mobile">
           <i class="material-icons">menu</i>
@@ -36,7 +40,7 @@
 
 
   <!--Vue qui évolue selon les boutons cliqués-->
-  <main>
+  <main class="container section">
     <div ng-view></div>
   </main>
 
