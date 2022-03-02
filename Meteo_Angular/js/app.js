@@ -46,14 +46,16 @@ getInfo = function ($http, city) {
 // doc : https://docs.angularjs.org/api/ngRoute/service/$route 
 // et https://github.com/angular/angular.js/issues/11063 mais lui il met son controller direct dans le app.config
 app.controller("meteovillesController", ["$scope", "$http", "$route", function ($scope, $http, $routeParams) {
+    $scope.prev = function () {
+        // quand on clique sur un lien
+        $routeParams.updateParams({ville: "Vannes"});
+    }
     $scope.stored = [
         { title: 'Vannes', text: "Une petite ville de Bretagne" },
         { title: 'Shangaï', text: "Une métropole chinoise" },
         { title: 'Jérusalem', text: "WE WILL TAKE IT" }
       ];
-      
-    // quand on clique sur un lien
-    $routeParams.updateParams({ville: "Vannes"});
+
     
 }])
 
