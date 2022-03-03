@@ -1,32 +1,48 @@
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1) || "";
 
-// permet de passer un argument en paramètre
-// doc : https://docs.angularjs.org/api/ngRoute/service/$route 
-// et https://github.com/angular/angular.js/issues/11063 mais lui il met son controller direct dans le app.config
 app.controller("meteovillesController", ["$scope", "$http", function ($scope, $http) {
-    $scope.villes = [{title:"Vannes", id: 0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
+    // $scope.villes = [{title:"Vannes", id: 0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
     
-    $scope.villes = [];
-    for(let i = 0; i < localStorage.length; i++) {
-        $scope.villes.push({title: capitalize(localStorage.key(i))});
-    }   
-    $scope.villes.forEach(v => {
-        $http.get(`https://api.openweathermap.org/data/2.5/weather?q=${v.title}&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric&lang=fr`)
-        .then(res => {
-            v.data = {};
-            v.data.temp = res.data.main.temp;
-            v.data.desc = capitalize(res.data.weather[0].description);
-            v.data.vVent = res.data.wind.speed;
-            v.data.orVent = `wi wi-wind towards-${res.data.wind.deg}-deg`;
-            v.data.meteo = `wi wi-owm-${res.data.weather[0].id}`
-            v.data.humidite = res.data.main.humidity;
-            v.data.pression = res.data.main.pressure;
+    // fonction pour refresh l'ensemble de données
+    const refresh = () => {
+        $scope.villes = [];
+        // On récupère les valeurs du localStorage pour les ranger dans le tableau des villes
+        for(let i = 0; i < localStorage.length; i++) {
+            $scope.villes.push({title: capitalize(localStorage.key(i)), id: localStorage.getItem(localStorage.key(i))});
+        }   
+        $scope.villes.forEach(v => {
+            $http.get(`https://api.openweathermap.org/data/2.5/weather?q=${v.title}&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric&lang=fr`)
+            .then(res => {
+                v.data = {};
+                v.data.temp = res.data.main.temp;
+                v.data.desc = capitalize(res.data.weather[0].description);
+                v.data.vVent = res.data.wind.speed;
+                v.data.orVent = `wi wi-wind towards-${res.data.wind.deg}-deg`;
+                v.data.meteo = `wi wi-owm-${res.data.weather[0].id}`
+                v.data.humidite = res.data.main.humidity;
+                v.data.pression = res.data.main.pressure;
+            });
         });
-    });
+    }
+    refresh();
+
+    // Fonction pour supprimer une ville quand on clique sur le bouton correspondant
+    $scope.suppr = function (ville) {
+        console.log(ville);
+
+        localStorage.removeItem(ville.toLowerCase());
+        refresh();
+    }
 }])
 
 app.controller("previsionsController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
-    let villes = [{title: "Vannes", id:0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
+    // let villes = [{title: "Vannes", id:0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
+
+    let villes = [];
+    for(let i = 0; i < localStorage.length; i++) {
+        villes.push({title: capitalize(localStorage.key(i)), id: localStorage.getItem(localStorage.key(i))});
+    }  
+
     $scope.ville = villes.find(elem => elem.id.toString() === $routeParams.ville); // sort l'objet ville pour lequel l'id correspond à celui passé en param
     $scope.title = $scope.ville.title;
     $scope.ville.data = [];
@@ -49,8 +65,6 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
 }])
 
 
-
-// Récup la valeur de l'input et les infos correspondantes quand on appuie sur valider
 app.controller("villesController", ["$scope", "$http", function ($scope, $http) {
     // localStorage.clear();
     $scope.valid = function () {
@@ -73,7 +87,6 @@ app.controller("villesController", ["$scope", "$http", function ($scope, $http) 
         else {
             console.log("Ville inexistante");
         }
-
     }
         
 }]);
