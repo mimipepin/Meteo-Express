@@ -1,21 +1,22 @@
-<div ng-controller="previsionsController">
-    <h1 class="header center orange-text">Prévisions de cette semaine pour {{title}}</h1>
-    <ul>
-        <li class="center section" ng-repeat="x in ville.data">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title blue-grey lighten-1">{{x.date}}</span>
-                    <div class="row">
-                        <div class="col s6">
-                            <p>{{x.desc}} <i ng-class="x.meteo"></i></p>
-                            <p>Température minimale : {{x.min}}%</p>
+<div class ="center" ng-controller="previsionsController">
+    <h1 class="header orange-text">Prévisions de cette semaine pour {{title}}</h1>
+    <div class="row section">
+        <ul>
+            <li class="col s3" ng-repeat="x in ville.data">
+                <div class="card size blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title blue-grey lighten-1" style="font-size: 1em">{{x.date}}</span>
+                        <div>
+                            <p>{{x.desc}} </p>
+                            <i class="small" ng-class="x.meteo"></i>
+                            <p>Température minimale : {{x.min}} °C</p>
                         </div>
-                        <div class="col s6">
+                        <div>
                             <p class="">Température maximale : {{x.max}} °C</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 </div>

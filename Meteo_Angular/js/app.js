@@ -5,7 +5,7 @@ app.config(['$routeProvider',
         $routeProvider
             .when('/villes', {
                 templateUrl: "partials/villes.html",
-                controller: "testController"
+                controller: "villesController"
             }).when('/previsions/:ville', {
                 templateUrl: "partials/previsions.html",
                 controller: "previsionsController"

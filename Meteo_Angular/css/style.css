@@ -14,3 +14,9 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+.card.size {
+  height: 280px;
+  /* width: 250px; */
+  margin-right: -15px;
+}

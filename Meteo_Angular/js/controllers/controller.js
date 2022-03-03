@@ -1,27 +1,21 @@
-let createArray = function(data){
-    ret = {};
-    ret['title'] = data.name;
-    ret['text'] = data.weather[0].description;
-    ret['temp'] = data.main.temp;
-    ret['vitesseVent'] = data.wind.speed;
-    ret['orientationVent'] = data.wind.deg;
-    ret['icone'] = data.weather[0].icon;
-    ret['humidite'] = data.main.humidity;
-    ret['pression'] = data.main.pressure;
-    return ret;
-}
+const capitalize = s => s && s[0].toUpperCase() + s.slice(1) || "";
 
 // permet de passer un argument en paramètre
 // doc : https://docs.angularjs.org/api/ngRoute/service/$route 
 // et https://github.com/angular/angular.js/issues/11063 mais lui il met son controller direct dans le app.config
 app.controller("meteovillesController", ["$scope", "$http", function ($scope, $http) {
-    $scope.villes = [{title:"Vannes", id: 0}, {title:"Shangai", id: 1}, {title:"Jerusalem", id: 2}];
+    $scope.villes = [{title:"Vannes", id: 0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
+    
+    $scope.villes = [];
+    for(let i = 0; i < localStorage.length; i++) {
+        $scope.villes.push({title: capitalize(localStorage.key(i))});
+    }   
     $scope.villes.forEach(v => {
         $http.get(`https://api.openweathermap.org/data/2.5/weather?q=${v.title}&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric&lang=fr`)
         .then(res => {
             v.data = {};
             v.data.temp = res.data.main.temp;
-            v.data.desc = res.data.weather[0].description;
+            v.data.desc = capitalize(res.data.weather[0].description);
             v.data.vVent = res.data.wind.speed;
             v.data.orVent = `wi wi-wind towards-${res.data.wind.deg}-deg`;
             v.data.meteo = `wi wi-owm-${res.data.weather[0].id}`
@@ -32,7 +26,7 @@ app.controller("meteovillesController", ["$scope", "$http", function ($scope, $h
 }])
 
 app.controller("previsionsController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
-    let villes = [{title: "Vannes", id:0}, {title:"Shangai", id: 1}, {title:"Jerusalem", id: 2}];
+    let villes = [{title: "Vannes", id:0}, {title:"Shanghai", id: 1}, {title:"Jerusalem", id: 2}, {title:"Brest", id: 3}, {title:"Bordeaux", id: 4}];
     $scope.ville = villes.find(elem => elem.id.toString() === $routeParams.ville); // sort l'objet ville pour lequel l'id correspond à celui passé en param
     $scope.title = $scope.ville.title;
     $scope.ville.data = [];
@@ -43,8 +37,8 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
                 //pour chaque jour, ajoute un objet avec les infos
                 res.data.daily.forEach(elem => {
                     $scope.ville.data.push({
-                        date: new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full'}).format(new Date(elem.dt*1000)),
-                        desc: elem.weather[0].description,
+                        date: capitalize(new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full'}).format(new Date(elem.dt*1000))),
+                        desc: capitalize(elem.weather[0].description),
                         meteo: `wi wi-owm-${elem.weather[0].id}`,
                         min: elem.temp.min,
                         max: elem.temp.max
@@ -57,29 +51,29 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
 
 
 // Récup la valeur de l'input et les infos correspondantes quand on appuie sur valider
-app.controller("testController", ["$scope", "$http", function ($scope, $http) {
+app.controller("villesController", ["$scope", "$http", function ($scope, $http) {
+    // localStorage.clear();
     $scope.valid = function () {
-        console.log($scope.city);
-        let city = $scope.city;
-        $http({
-            method: 'GET',
-            url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=fr&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric`
-        }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-            console.log(response.data);
-            var a = createArray(response.data);
-            localStorage.setItem($scope.city, a);
+        let ville = $scope.city;
+        if (ville) { 
+            $http.get(`https://api.openweathermap.org/geo/1.0/direct?q=${ville},fr&limit=1&appid=2370a9749f38195f07d3bbefd145b74c`)
+            .then((res) => {
+                if (res.data.length > 0) {
+                    console.log(ville)
+                    let storeLen = localStorage.length
+                    localStorage.setItem(ville.toLowerCase(), storeLen)
+                    window.location = "/"
+                }
+                else {
+                    
+                    console.log("Ville inexistante erreur");
+                }
+            });
+        }
+        else {
+            console.log("Ville inexistante");
+        }
 
-            $scope.test = response.data.weather[0].description;
-
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            console.log("pas de ville");
-            throw new Error(error.statusText);
-        });
-        
     }
         
 }]);
