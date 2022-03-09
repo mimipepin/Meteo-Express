@@ -13,7 +13,7 @@
             <li class="col s5" ng-repeat="x in villes">
                 
                 <!-- On va afficher une carte contenant de multiples informations-->
-                <div class="card medium light-blue lighten-1">
+                <div class="card size medium light-blue lighten-1">
                     <div class="card-content white-text">
                         <!-- Tout d'abord le titre (x.title) qui sera affiché en grand-->
                         <span class="card-title light-blue darken-3">{{x.title}}</span>
@@ -39,8 +39,8 @@
                         2. Supprimer la ville du localStorage et de l'affichage
                         -->
                         <div class="card-action">
-                            <a ng-href="#!previsions/{{x.id}}" class="btn-large waves-effect waves-light light-blue darken-3 left">Prévisions de la ville</a>
-                            <a id="supprimerVille" ng-click="suppr(x.title)" class="btn-large waves-effect waves-light light-blue darken-2 right"><i class="fa-solid fa-eraser"></i></a>
+                            <a ng-href="#!previsions/{{x.id}}" class="btn-small waves-effect waves-light light-blue darken-3 left">Prévisions</a>
+                            <a id="supprimerVille" ng-click="suppr(x.title)" class="btn-small waves-effect waves-light light-blue darken-2 right"><i class="fa-solid fa-eraser"></i></a>
                         </div>
                     </div>
                 </div>
