@@ -1,31 +1,43 @@
 <div class="center" ng-controller="meteovillesController">
+    <!-- Cette page consiste en l'affichage d'une liste des villes existantes dans le localStorage-->
     <h1 class="header orange-text">Liste des villes</h1>
 
     <div class="right">
-        <!-- <a href="#!villes" class="btn-large waves-effect waves-light blue-grey">Ajouter une ville</a> -->
-        <a href="#!villes" class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">add</i></a>
+        <!-- Ici on a un bouton permettant l'ajout de villes à notre liste. Ce bouton a la forme d'un +-->
+        <a href="#!villes" class="btn-floating btn-large waves-effect waves-light light-blue lighten-1"><i class="material-icons">add</i></a>
     </div>
 
     <div class="row section">
         <ul>
+            <!-- Pour chaque ville que l'on extrait du localStorage...-->
             <li class="col s5" ng-repeat="x in villes">
+                
+                <!-- On va afficher une carte contenant de multiples informations-->
                 <div class="card medium light-blue lighten-1">
                     <div class="card-content white-text">
-                        <span class="card-title  light-blue darken-3">{{x.title}}</span>
+                        <!-- Tout d'abord le titre (x.title) qui sera affiché en grand-->
+                        <span class="card-title light-blue darken-3">{{x.title}}</span>
                         <div class="row">
                             <div class="col s5">
+                                <!-- Puis d'autres informations comme la description, l'humidité, la pression...-->
                                 <p>{{x.data.desc}}</p>
+                                <!-- Là on affiche une icône correspondant au temps actuel dans la ville sélectionnée-->
                                 <i ng-class="x.data.meteo" class="medium"></i>
                                 <p>Humidité : {{x.data.humidite}}%</p>
                                 <p>Pression : {{x.data.pression}} hPa</p>
                             </div>
                             <div class="col s7">
+                                <!-- La vitesse du vent, la température etc...-->
                                 <p>Vitesse du vent : {{x.data.vVent}} m/s</p>
+                                <!-- Ici on affiche la direction du vent sous la forme d'une îcône-->
                                 <i ng-class="x.data.orVent" class="medium"></i>
                                 <p class="">Température : {{x.data.temp}} °C</p>
                             </div>
                         </div>
-    
+                        <!-- On a ensuite deux boutons qui permettent :
+                        1. D'avoir accès aux prévisions pour la semaine de la ville
+                        2. Supprimer la ville du localStorage et de l'affichage
+                        -->
                         <div class="card-action">
                             <a ng-href="#!previsions/{{x.id}}" class="btn-large waves-effect waves-light light-blue darken-3 left-align">Prévisions de la ville</a>
                             <a id="supprimerVille" ng-click="suppr(x.title)" class="btn-large waves-effect waves-light light-blue darken-2 right-align">Supprimer la ville</a>

@@ -1,4 +1,5 @@
 <div class ="center" ng-controller="previsionsController">
+    <!-- Ici on affiche les prévisions de la semaine pour la ville sélectionée-->
     <h1 class="header orange-text">Prévisions de cette semaine pour {{title}}</h1>
     
     <a href="/" class="btn-floating btn-medium waves-effect waves-light blue-grey left"><i class="material-icons">arrow_back</i></a>
@@ -7,12 +8,16 @@
     
     <div class="row section">
         <ul>
+            <!-- Pour chaque journée comprise dans la partie data de la ville sélectionnée...-->
             <li class="col s3" ng-repeat="x in ville.data">
+                <!-- On fait une carte contenant quelques informations-->
                 <div class="card size blue-grey darken-1">
                     <div class="card-content white-text">
+                        <!-- Ces informations sont la date de la prédiction, la description, la température minimale et maximale...-->
                         <span class="card-title blue-grey lighten-1" style="font-size: 1em">{{x.date}}</span>
                         <div>
                             <p>{{x.desc}} </p>
+                            <!-- On affiche ici une icône correspondant à la météo prévue-->
                             <i class="small" ng-class="x.meteo"></i>
                             <p><i class="fa-solid fa-temperature-empty fa-xl"></i> Température minimale : {{x.min}} °C</p>
                         </div>

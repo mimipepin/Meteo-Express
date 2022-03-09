@@ -1,11 +1,14 @@
 <div class="section center no-pad-bot" id="index-banner">
+    <!-- Cette page consiste simplement en un textInput permettant d'entrer une ville qui sera ensuite ajoutée par le localStorage-->
     <div ng-controller="villesController">
         <br><br>
         <h2 class="header orange-text">Ajoutez une ville : </h2>
         <div>
+            <!-- On entre la ville à ajouter à la liste ici-->
             <input type="text" ng-model="city">
         </div>
         <br><br>
+        <!-- Une fois ce bouton cliqué, on appel la méthode valid() du controller-->
         <a id="valid-button" class="btn-large waves-effect waves-light orange" ng-click="valid()" >Valider</a>
     </div>
 </div>
