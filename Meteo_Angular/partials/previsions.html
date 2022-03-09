@@ -12,10 +12,11 @@
                 <!-- On fait une carte contenant quelques informations-->
                 <div class="card size blue-grey darken-1">
                     <div class="card-content white-text">
-                        <!-- Ces informations sont la date de la prédiction, la description, la température minimale et maximale-->
+                        <!-- Ces informations sont la date de la prédiction, la description, la température minimale et maximale...-->
                         <span class="card-title blue-grey lighten-1" style="font-size: 1em">{{x.date}}</span>
                         <div>
                             <p>{{x.desc}} </p>
+                            <!-- On affiche ici une icône correspondant à la météo prévue-->
                             <i class="small" ng-class="x.meteo"></i>
                             <p>Température minimale : {{x.min}} °C</p>
                         </div>
