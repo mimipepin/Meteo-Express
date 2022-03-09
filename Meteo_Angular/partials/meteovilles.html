@@ -9,9 +9,9 @@
     <div class="row section">
         <ul>
             <li class="col s5" ng-repeat="x in villes">
-                <div class="card medium blue-grey darken-1">
+                <div class="card medium light-blue lighten-1">
                     <div class="card-content white-text">
-                        <span class="card-title blue-grey lighten-1">{{x.title}}</span>
+                        <span class="card-title  light-blue darken-3">{{x.title}}</span>
                         <div class="row">
                             <div class="col s5">
                                 <p>{{x.data.desc}}</p>
@@ -27,8 +27,8 @@
                         </div>
     
                         <div class="card-action">
-                            <a ng-href="#!previsions/{{x.id}}">Prévisions de la ville</a>
-                            <a id="supprimerVille" ng-click="suppr(x.title)" class="btn-large waves-effect waves-light blue-grey right-align">Supprimer la ville</a>
+                            <a ng-href="#!previsions/{{x.id}}" class="btn-large waves-effect waves-light light-blue darken-3 left-align">Prévisions de la ville</a>
+                            <a id="supprimerVille" ng-click="suppr(x.title)" class="btn-large waves-effect waves-light light-blue darken-2 right-align">Supprimer la ville</a>
                         </div>
                     </div>
                 </div>

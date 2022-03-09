@@ -79,7 +79,6 @@ app.controller("villesController", ["$scope", "$http", function ($scope, $http) 
                     window.location = "/"
                 }
                 else {
-                    
                     console.log("Ville inexistante erreur");
                 }
             });
