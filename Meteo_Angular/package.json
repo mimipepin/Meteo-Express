@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "angular-http-server -p 3000 --rootFile index.html"
+    "start": "angular-http-server -p 3000 --rootFile ./dist/index.html"
   },
   "dependencies": {
     "angular": "^1.8.2",
     "angular-http-server": "^1.10.0",
     "angular-route": "^1.8.2",
+    "lodash": "^4.17.21",
     "materialize-css": "^1.0.0"
   },
   "devDependencies": {
