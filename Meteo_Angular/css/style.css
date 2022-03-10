@@ -15,10 +15,15 @@ main {
   flex: 1 0 auto;
 }
 
-.card.size {
-  /* height: 280px; */
-  /* width: 250px; */
-  margin-right: -15px;
+#cartesPrevisions {
+  height: 400px;
+  /* width: 110%; */
+  /* margin-right: -15px;  */
+}
+
+#cartesMeteoVilles {
+  /* width: 110%; */
+  /* margin-right: 15px; */
 }
 
 p {

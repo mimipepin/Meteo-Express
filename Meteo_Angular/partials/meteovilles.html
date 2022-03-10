@@ -13,7 +13,7 @@
             <li class="col s5" ng-repeat="x in villes">
                 
                 <!-- On va afficher une carte contenant de multiples informations-->
-                <div class="card size medium light-blue lighten-1">
+                <div class="card medium light-blue lighten-1" id="cartesMeteoVilles">
                     <div class="card-content white-text">
                         <!-- Tout d'abord le titre (x.title) qui sera affiché en grand-->
                         <span class="card-title light-blue darken-3">{{x.title}}</span>
@@ -23,7 +23,7 @@
                                 <p>{{x.data.desc}}</p>
                                 <!-- Là on affiche une icône correspondant au temps actuel dans la ville sélectionnée-->
                                 <i ng-class="x.data.meteo" class="medium"></i>
-                                <p>Humidité : {{x.data.humidite}}%</p>
+                                <p>Humidité : {{x.data.humidite}}%</p>  
                                 <p>Pression : {{x.data.pression}} hPa</p>
                             </div>
                             <div class="col s7">
