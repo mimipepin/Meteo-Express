@@ -10,7 +10,6 @@ const capitalize = s => s && s[0].toUpperCase() + s.slice(1) || "";
  * @param $http
  */
 app.controller("meteovillesController", ["$scope", "$http", function ($scope, $http) {
-    
     //Ici, on peut voir le modèle d'une liste de villes que l'on avait crée pour le stockage "en dur" par array
     //Cette variable servait à enregistrer le nom de certaines villes afin qu'elles soient affichées sur la page d'accueil.
     
@@ -43,7 +42,6 @@ app.controller("meteovillesController", ["$scope", "$http", function ($scope, $h
 
     // Fonction pour supprimer une ville quand on clique sur le bouton correspondant
     $scope.suppr = function (ville) {
-        console.log(ville);
         //on remove simplement la ville du localStorage. On la met en minuscule car c'est ainsi que sont stockées nos données
         localStorage.removeItem(ville.toLowerCase());
         refresh();
@@ -71,14 +69,14 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
 
     // sort l'objet ville pour lequel l'id correspond à celui passé en paramètre dans l'url de la page
     $scope.ville = villes.find(elem => elem.id.toString() === $routeParams.ville); 
-    //On récupère son titre et on crée une partie data...
+    //On récupère son titre et on crée un tableau data...
     $scope.title = $scope.ville.title;
     $scope.ville.data = [];
     //Que l'on complète en requêtant l'API openweather !
     $http.get(`https://api.openweathermap.org/geo/1.0/direct?q=${$scope.ville.title},fr&limit=1&appid=2370a9749f38195f07d3bbefd145b74c`)
-        .then(cooRes => {
+        .then((cooRes) => {
             $http.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${cooRes.data[0].lat}&lon=${cooRes.data[0].lon}&exclude=current,minutely,hourly,alerts&appid=2370a9749f38195f07d3bbefd145b74c&units=metric&lang=fr`)
-            .then(res => {
+            .then((res) => {
                 //pour chaque jour de la semaine, on ajoute un objet avec les informations nécessaires, 
                 //qui serront exploitées dans les prévisions de la semaine
                 res.data.daily.forEach(elem => {
@@ -95,6 +93,9 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
                     });
                 });
             });
+        })
+        .catch(err => {
+            console.log(err);
         });
 }])
 
@@ -106,31 +107,30 @@ app.controller("previsionsController", ["$scope", "$http", "$routeParams", funct
  * @param $http
  */
 app.controller("villesController", ["$scope", "$http", function ($scope, $http) {
-   
     $scope.valid = function () {
         //on récupère la ville dans l'input de la vue
         let ville = $scope.city;
         //Puis on vérifie que la ville existe ou non dans l'API openweather
         if (ville) { 
             //On requête l'API...
-            $http.get(`https://api.openweathermap.org/geo/1.0/direct?q=${ville},fr&limit=1&appid=2370a9749f38195f07d3bbefd145b74c`)
+            $http.get(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=2370a9749f38195f07d3bbefd145b74c&units=metric&lang=fr`)
             .then((res) => {
-                //Si la ville existe, on peut la stocker sans soucis !
-                if (res.data.length > 0) {
-                    let storeLen = localStorage.length
-                    //On stocke les villes en minuscules afin d'éviter les doublons
-                    localStorage.setItem(ville.toLowerCase(), storeLen)
-                    window.location = "/"
-                }
-                //Si elle n'existe pas, on affiche une erreur 
-                else {
-                    console.log("Ville inexistante erreur");
-                }
+                let storeLen = localStorage.length
+                //On stocke les villes en minuscules afin d'éviter les doublons
+                localStorage.setItem(ville.toLowerCase(), storeLen)
+                window.location = "/"
+            })
+            .catch((err) => {
+                console.log(err);
+                $scope.city = "";
+                $scope.erreur = "Erreur : ville inexistante";
             });
         }
         //Si on a pas récupéré la ville, on affiche une autre erreur
         else {
             console.log("Ville inexistante");
+            $scope.city = "";
+            $scope.erreur = "Erreur : ville inexistante";
         }
     }
         
