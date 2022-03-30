@@ -1,0 +1,3 @@
+cartes méteo villes 
+bouton plus pour ajouter une nouvelle ville avec un form
+sur carte bouton + pour info sup dans une page principale -> info 7 jours ? 
