@@ -2,23 +2,26 @@
     <!-- Cette page consiste en l'affichage d'une liste des villes existantes dans le localStorage-->
     <h1 class="header orange-text">Liste des villes</h1>
 
-    <div class="right">
-        <!-- Ici on a un bouton permettant l'ajout de villes à notre liste. Ce bouton a la forme d'un +-->
-        <a href="#!villes" class="btn-floating btn-large waves-effect waves-light light-blue lighten-1"><i class="material-icons">add</i></a>
+    <div class="row">
+        <div class="col s12">
+            <!-- Ici on a un bouton permettant l'ajout de villes à notre liste. Ce bouton a la forme d'un +-->
+            <a href="#!villes" class="right btn-floating btn-large waves-effect waves-light light-blue lighten-1"><i class="material-icons">add</i></a>
+        </div>
     </div>
+
 
     <div class="row section">
         <ul>
             <!-- Pour chaque ville que l'on extrait du localStorage...-->
-            <li class="col s5" ng-repeat="x in villes">
+            <li class="col l5 m6 s12" ng-repeat="x in villes">
                 
                 <!-- On va afficher une carte contenant de multiples informations-->
-                <div class="card medium light-blue lighten-1" id="cartesMeteoVilles">
+                <div class="card light-blue lighten-1" id="cartesMeteoVilles">
                     <div class="card-content white-text">
                         <!-- Tout d'abord le titre (x.title) qui sera affiché en grand-->
                         <span class="card-title light-blue darken-3">{{x.title}}</span>
                         <div class="row">
-                            <div class="col s5">
+                            <div class="col l5 s12">
                                 <!-- Puis d'autres informations comme la description, l'humidité, la pression...-->
                                 <p>{{x.data.desc}}</p>
                                 <!-- Là on affiche une icône correspondant au temps actuel dans la ville sélectionnée-->
@@ -26,7 +29,7 @@
                                 <p>Humidité : {{x.data.humidite}}%</p>  
                                 <p>Pression : {{x.data.pression}} hPa</p>
                             </div>
-                            <div class="col s7">
+                            <div class="col l7 s12">
                                 <!-- La vitesse du vent, la température etc...-->
                                 <p>Vitesse du vent : {{x.data.vVent}} m/s</p>
                                 <!-- Ici on affiche la direction du vent sous la forme d'une îcône-->
